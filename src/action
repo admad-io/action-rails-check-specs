@@ -2,3 +2,4 @@
 
 puts RUBY_VERSION
 puts ENV["GITHUB_REPOSITORY"]
+puts %x[ls -l]
