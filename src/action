@@ -2,8 +2,8 @@
 
 puts "% pwd"
 puts %x[pwd]
-puts "% ls -l "
-puts %x[ls -l]
+puts "% ls -la"
+puts %x[ls -la]
 puts "% git branch"
 puts %[git branch]
 puts "% git branch -l"
