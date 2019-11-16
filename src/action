@@ -8,7 +8,7 @@ BRANCH = ENV["GITHUB_REF"]
 ACTOR = ENV["GITHUB_ACTOR"]
 
 BASIC_AUTH = Base64.encode64(
-  format("x-access-token:%s", ENV.fetch("GITHUB_TOKEN"))
+  format("%s:%s", ENV.fetch("GITHUB_ACTOR"), ENV.fetch("GITHUB_TOKEN"))
 )
 
 %x[git -c http.extraheader="AUTHORIZATION: basic #{BASIC_AUTH}" clone #{REPO} /tmp/x]
