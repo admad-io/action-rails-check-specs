@@ -14,7 +14,7 @@ puts "% git diff master..."
 puts %x[git diff master...]
 
 missing_specs =
-  %x[git diff --diff-filter=AM --name-only master... 'app/**/*.rb']
+  %x[git diff --diff-filter=AM --name-only master... -- 'app/**/*.rb']
     .split("\n")
     .map { _1.sub(/^app/, "spec") }
     .map { _1.sub(/\.rb$/, "_spec.rb") }
