@@ -1,5 +1,8 @@
 #!/usr/bin/env ruby
 
+puts %x[pwd]
+puts %x[ls -l]
+
 missing_specs =
   %x[git diff --diff-filter=AM --name-only master... 'app/**/*.rb']
     .split("\n")
