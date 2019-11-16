@@ -1,14 +1,18 @@
 #!/usr/bin/env ruby
 
+puts "% git -v"
+puts %x[git -v]
 puts "% pwd"
 puts %x[pwd]
 puts "% ls -la"
 puts %x[ls -la]
 puts "% git branch"
-puts %[git branch]
+puts %x[git branch]
 puts "% git branch -l"
-puts %[git branch -l]
-puts %[git diff master...]
+puts "% git branch -l"
+puts %x[git branch -l]
+puts "% git diff master..."
+puts %x[git diff master...]
 
 missing_specs =
   %x[git diff --diff-filter=AM --name-only master... 'app/**/*.rb']
