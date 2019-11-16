@@ -2,9 +2,9 @@
 
 TOKEN = ENV["GITHUB_TOKEN"]
 
-%[git -c http.extraheader="AUTHORIZATION: Bearer #{TOKEN}" clone ENV["GITHUB_REPOSITORY"] /tmp/x]
+%x[git -c http.extraheader="AUTHORIZATION: Bearer #{TOKEN}" clone ENV["GITHUB_REPOSITORY"] /tmp/x]
 
-puts %[ls -la /tmp/x]
+puts %x[ls -la /tmp/x]
 
 puts "% git --version"
 puts %x[git --version]
