@@ -1,8 +1,9 @@
 #!/usr/bin/env ruby
 
 TOKEN = ENV["GITHUB_TOKEN"]
+REPO = format("https://github.com/%s", ENV["GITHUB_REPOSITORY"])
 
-%x[git -c http.extraheader="AUTHORIZATION: Bearer #{TOKEN}" clone ENV["GITHUB_REPOSITORY"] /tmp/x]
+%x[git -c http.extraheader="AUTHORIZATION: Bearer #{TOKEN}" clone #{REPO} /tmp/x]
 
 puts %x[ls -la /tmp/x]
 
