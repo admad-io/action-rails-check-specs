@@ -1,8 +1,7 @@
 #!/usr/bin/env ruby
 
 missing_specs =
-  %x[git diff --diff-filter=AM --name-only master... -- 'app/**/*.rb']
-    .split("\n")
+  Dir["app/**/*.rb"]
     .map { _1.sub(/^app/, "spec") }
     .map { _1.sub(/\.rb$/, "_spec.rb") }
     .reject(&File.:exist?)
