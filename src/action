@@ -1,35 +1,5 @@
 #!/usr/bin/env ruby
 
-require "base64"
-
-TOKEN = ENV["GITHUB_TOKEN"]
-REPO = format("https://github.com/%s", ENV["GITHUB_REPOSITORY"])
-BRANCH = ENV["GITHUB_REF"]
-ACTOR = ENV["GITHUB_ACTOR"]
-
-BASIC_AUTH = Base64.encode64(
-  format("%s:%s", ENV.fetch("GITHUB_ACTOR"), ENV.fetch("GITHUB_TOKEN"))
-)
-
-%x[git -c http.extraheader="AUTHORIZATION: basic #{BASIC_AUTH}" clone #{REPO} /tmp/x]
-%x[cd /tmp/x/]
-%x[git checkout #{BRANCH}]
-
-puts %x[ls -la /tmp/x]
-
-puts "% git --version"
-puts %x[git --version]
-puts "% pwd"
-puts %x[pwd]
-puts "% ls -la"
-puts %x[ls -la]
-puts "% git branch"
-puts %x[git branch]
-puts "% git branch -l"
-puts %x[git branch -l]
-puts "% git diff master..."
-puts %x[git diff master...]
-
 missing_specs =
   %x[git diff --diff-filter=AM --name-only master... -- 'app/**/*.rb']
     .split("\n")
