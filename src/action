@@ -34,7 +34,6 @@
 
 missing_specs =
   Dir["app/**/*.rb"]
-    .split("\n")
     .map { _1.sub(/^app/, "spec") }
     .map { _1.sub(/\.rb$/, "_spec.rb") }
     .reject(&File.:exist?)
