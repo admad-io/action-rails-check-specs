@@ -5,7 +5,7 @@
 
 IGNORED_FILES = %r{
   factories|requests|system|support|_helper|routing|integration|external|views
-}.freeze
+}x.freeze
 
 # TOKEN = ENV["GITHUB_TOKEN"]
 # REPO = format("https://github.com/%s", ENV["GITHUB_REPOSITORY"])
