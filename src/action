@@ -41,7 +41,7 @@ missing_specs =
   Dir["app/**/*.rb"]
     .map { _1.sub(/^app/, "spec") }
     .map { _1.sub(/\.rb$/, "_spec.rb") }
-    .reject(&File.:exist?)
+    .reject { File.exist?(_1) }
     .each { puts format("Missing spec file: %s", _1) }
 
 missing_files =
@@ -49,7 +49,7 @@ missing_files =
     .map { _1.sub(/^spec/, "app") }
     .map { _1.sub(/_spec\.rb$/, ".rb") }
     .reject { |x| x =~ IGNORED_FILES }
-    .reject(&File.:exist?)
+    .reject { File.exist?(_1) }
     .each { puts format("Missing file: %s", _1) }
 
 exit(1) if missing_specs.any? || missing_files.any?
