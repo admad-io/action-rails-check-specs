@@ -2,6 +2,11 @@
 
 # require "base64"
 #
+
+IGNORED_FILES = %r{
+  factories|requests|system|support|_helper|routing|integration|external|views
+}.freeze
+
 # TOKEN = ENV["GITHUB_TOKEN"]
 # REPO = format("https://github.com/%s", ENV["GITHUB_REPOSITORY"])
 # BRANCH = ENV["GITHUB_REF"]
@@ -39,4 +44,12 @@ missing_specs =
     .reject(&File.:exist?)
     .each { puts format("Missing spec file: %s", _1) }
 
-exit(1) if missing_specs.any?
+missing_files =
+  Dir["spec/**/*.rb"]
+    .map { _1.sub(/^spec/, "app") }
+    .map { _1.sub(/_spec\.rb$/, ".rb") }
+    .reject { |x| x =~ IGNORED_FILES }
+    .reject(&File.:exist?)
+    .each { puts format("Missing file: %s", _1) }
+
+exit(1) if missing_specs.any? || missing_files.any?
