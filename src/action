@@ -1,11 +1,19 @@
 #!/usr/bin/env ruby
 
 # require "base64"
-#
+require "rake"
 
-IGNORED_FILES = %r{
-  factories|requests|system|support|_helper|routing|integration|external|views
-}x.freeze
+IGNORED_FILES = [
+  "spec/factories/**/*.rb",
+  "spec/requests/**/*.rb",
+  "spec/system/**/*.rb",
+  "spec/support/**/*.rb",
+  "spec/routing/**/*.rb",
+  "spec/integration/**/*.rb",
+  "spec/external/**/*.rb",
+  "spec/views/**/*.rb",
+  "spec/*_helper.rb"
+].freeze
 
 # TOKEN = ENV["GITHUB_TOKEN"]
 # REPO = format("https://github.com/%s", ENV["GITHUB_REPOSITORY"])
@@ -45,10 +53,10 @@ missing_specs =
     .each { puts format("Missing spec file: %s", _1) }
 
 missing_files =
-  Dir["spec/**/*.rb"]
+  FileList["spec/**/*.rb"]
+    .exclude(IGNORED_FILES)
     .map { _1.sub(/^spec/, "app") }
     .map { _1.sub(/_spec\.rb$/, ".rb") }
-    .reject { |x| x =~ IGNORED_FILES }
     .reject { File.exist?(_1) }
     .each { puts format("Missing file: %s", _1) }
 
