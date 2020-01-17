@@ -12,7 +12,8 @@ IGNORED_FILES = [
   "spec/integration/**/*.rb",
   "spec/external/**/*.rb",
   "spec/views/**/*.rb",
-  "spec/*_helper.rb"
+  "spec/*_helper.rb",
+  "spec/mailers/previews/**/*.rb",
 ].freeze
 
 # TOKEN = ENV["GITHUB_TOKEN"]
