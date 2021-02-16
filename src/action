@@ -8,6 +8,7 @@ IGNORED_FILES = [
   "spec/requests/**/*.rb",
   "spec/system/**/*.rb",
   "spec/support/**/*.rb",
+  "spec/schemas/*.rb",
   "spec/routing/**/*.rb",
   "spec/integration/**/*.rb",
   "spec/external/**/*.rb",
