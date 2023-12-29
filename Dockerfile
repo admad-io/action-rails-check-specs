@@ -1,5 +1,5 @@
-FROM ruby:2.7.0-preview2
-MAINTAINER Aleksander Długopolski <aleksander.dlugopolski@logihub.pl>
+FROM ruby:3.3.0-alpine 
+MAINTAINER Mariusz Droździel <mariusz.drozdziel@wehires.eu>
 
 COPY src/action /usr/bin/action
 
