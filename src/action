@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
-# require "base64"
 require "rake"
 
 IGNORED_FILES = [
@@ -48,18 +48,20 @@ IGNORED_FILES = [
 # %x[git diff --diff-filter=AM --name-only master... -- 'app/**/*.rb']
 
 missing_specs =
-  Dir["app/**/*.rb"]
-    .map { _1.sub(/^app/, "spec") }
-    .map { _1.sub(/\.rb$/, "_spec.rb") }
-    .reject { File.exist?(_1) }
-    .each { puts format("Missing spec file: %s", _1) }
+  Dir["app/**/*.rb", "lib/**/*.rb"]
+  .map { _1.sub(%r{^lib/}, "spec/lib/") }
+  .map { _1.sub(%r{^app/}, "spec/") }
+  .map { _1.sub(/\.rb$/, "_spec.rb") }
+  .reject { File.exist?(_1) }
+  .each { puts format("Missing spec file: %s", _1) }
 
 missing_files =
   FileList["spec/**/*.rb"]
-    .exclude(IGNORED_FILES)
-    .map { _1.sub(/^spec/, "app") }
-    .map { _1.sub(/_spec\.rb$/, ".rb") }
-    .reject { File.exist?(_1) }
-    .each { puts format("Missing file: %s", _1) }
+  .exclude(IGNORED_FILES)
+  .map { _1.sub(%r{^spec/lib/}, "lib/") }
+  .map { _1.sub(%r{^spec/}, "app/") }
+  .map { _1.sub(/_spec\.rb$/, ".rb") }
+  .reject { File.exist?(_1) }
+  .each { puts format("Missing file: %s", _1) }
 
 exit(1) if missing_specs.any? || missing_files.any?
